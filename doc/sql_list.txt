@@ -1,0 +1,251 @@
+-- ============================
+-- 10-05-2026
+-- ============================
+ALTER TABLE `orders` ADD `tracking_link` text NULL AFTER `stead_fast_tracking_code`;
+-- ============================
+-- 03-05-2026
+-- ============================
+ALTER TABLE `web_settings`
+ADD COLUMN `gtm_head` TEXT NULL AFTER `invoice_prefix`,
+ADD COLUMN `gtm_body` TEXT NULL AFTER `gtm_head`;
+
+-- ============================
+-- 16-04-2026
+-- ============================
+ALTER TABLE `products`
+ADD COLUMN `is_featured` TINYINT(1) NOT NULL DEFAULT 0 AFTER `sale_price`,
+ADD COLUMN `is_best_sell` TINYINT(1) NOT NULL DEFAULT 0 AFTER `is_featured`,
+ADD COLUMN `is_new_product` TINYINT(1) NOT NULL DEFAULT 0 AFTER `is_best_sell`;
+
+ALTER TABLE `products` ADD COLUMN IF NOT EXISTS `video_url` text NULL AFTER `gallery_images`;
+==================================
+23-10-2025
+==================================
+
+ALTER TABLE `order_products` CHANGE `attributes` `attributes` JSON NULL DEFAULT NULL;
+
+
+CREATE TABLE `product_attribute_variants` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_attribute_id` int(11) DEFAULT NULL,
+  `choice_attribute_item_name` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+ALTER TABLE `product_attribute_variants`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `product_attribute_variants`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+
+==================================
+30-09-2025
+==================================
+
+
+ALTER TABLE `order_products` ADD `product_sku` VARCHAR(255) NULL DEFAULT NULL AFTER `product_id`;
+
+
+CREATE TABLE `product_choice_attributes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `attribute_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+ALTER TABLE `product_choice_attributes`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `product_choice_attributes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+
+CREATE TABLE `product_choice_attribute_items` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `choice_attribute_id` bigint(20) UNSIGNED NOT NULL,
+  `attribute_item_id` bigint(20) UNSIGNED NOT NULL,
+  `attribute_item_name` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+ALTER TABLE `product_choice_attribute_items`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `product_choice_attribute_items`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+
+ALTER TABLE `product_attributes` CHANGE `image` `image` VARCHAR(255) NULL DEFAULT NULL;
+ALTER TABLE `attributes` ADD `is_image` TINYINT NULL DEFAULT NULL AFTER `title`;
+
+
+
+==================================
+30-07-2025
+==================================
+ALTER TABLE `web_settings` ADD `is_otp` TINYINT NOT NULL DEFAULT '0' AFTER `fb_pixel`,
+ADD `sender_id` VARCHAR(255) NULL AFTER `is_otp`,
+ADD `api_key` VARCHAR(255) NULL AFTER `sender_id`,
+ADD `otp_message` TEXT NULL AFTER `api_key`;
+
+ALTER TABLE `orders` ADD `otp_code` INT NULL AFTER `is_landing_page`, ADD `is_otp_verified` TINYINT NULL DEFAULT '0' AFTER `otp_code`;
+ALTER TABLE `web_settings` ADD `invoice_prefix` VARCHAR(20) NULL AFTER `fb_pixel`;
+ALTER TABLE `categories` ADD `is_homepage` TINYINT NOT NULL DEFAULT '0' AFTER `category_name`;
+
+
+=============================
+28-05-25
+=============================
+ALTER TABLE `orders` ADD `stead_fast_consignment_id` VARCHAR(255) NULL AFTER `status`, ADD `stead_fast_tracking_code` VARCHAR(255) NULL AFTER `stead_fast_consignment_id`;
+
+
+=============================
+26-05-25
+=============================
+
+ALTER TABLE `landing_pages` ADD `is_free_delivery` TINYINT NOT NULL DEFAULT '0' AFTER `status`;
+
+
+=============================
+23-05-25
+=============================
+ALTER TABLE `products` ADD `delivery_charge` DOUBLE NOT NULL DEFAULT '0' AFTER `is_free_delivery`;
+
+ALTER TABLE `products` ADD `purchase_cost` DOUBLE NOT NULL DEFAULT '0' AFTER `delivery_charge`;
+
+
+
+CREATE TABLE `abandoned_carts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `shipping_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `customer_name` varchar(255) DEFAULT NULL,
+  `customer_phone` varchar(255) DEFAULT NULL,
+  `customer_address` text DEFAULT NULL,
+  `abandoned_item` text DEFAULT NULL,
+  `shipping_cost` decimal(10,4) NOT NULL DEFAULT 0.0000,
+  `discount` decimal(10,4) NOT NULL DEFAULT 0.0000,
+  `subtotal` decimal(10,4) NOT NULL DEFAULT 0.0000,
+  `total` decimal(10,4) NOT NULL DEFAULT 0.0000,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+ALTER TABLE `abandoned_carts`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `abandoned_carts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+ALTER TABLE `abandoned_carts` ADD `note` TEXT NULL AFTER `total`;
+
+ALTER TABLE `orders` ADD `source` VARCHAR(100) NULL AFTER `status`;
+
+
+
+CREATE TABLE `landing_pages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `type` int(11) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `data` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE `landing_page_media` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `landing_page_id` bigint(20) UNSIGNED NOT NULL,
+  `section_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE `landing_page_products` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `landing_page_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+ALTER TABLE `landing_pages`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `landing_pages_slug_unique` (`slug`);
+
+
+ALTER TABLE `landing_page_media`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `landing_page_media_landing_page_id_foreign` (`landing_page_id`);
+
+
+ALTER TABLE `landing_page_products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `landing_page_products_landing_page_id_foreign` (`landing_page_id`),
+  ADD KEY `landing_page_products_product_id_foreign` (`product_id`);
+
+
+ALTER TABLE `landing_pages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+
+ALTER TABLE `landing_page_media`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+
+ALTER TABLE `landing_page_products`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+
+ALTER TABLE `landing_page_media`
+  ADD CONSTRAINT `landing_page_media_landing_page_id_foreign` FOREIGN KEY (`landing_page_id`) REFERENCES `landing_pages` (`id`) ON DELETE CASCADE;
+
+
+ALTER TABLE `landing_page_products`
+  ADD CONSTRAINT `landing_page_products_landing_page_id_foreign` FOREIGN KEY (`landing_page_id`) REFERENCES `landing_pages` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `landing_page_products_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+COMMIT;
+
+
+ALTER TABLE `orders` ADD `is_landing_page` TINYINT NOT NULL DEFAULT '0' AFTER `staff_note`;
+
+
+
+=============================
+28-04-25
+=============================
+ALTER TABLE `web_settings` ADD `website_favicon` INT NULL AFTER `website_header_logo`;
+
+
+=============================
+21-03-25
+=============================
+
+ALTER TABLE `products` ADD `is_free_delivery` TINYINT NOT NULL DEFAULT '0' AFTER `status`;
+
+
+=============================
+18-12-24
+=============================
+
+ALTER TABLE `products` ADD `position` INT NOT NULL DEFAULT '0' AFTER `sku`;

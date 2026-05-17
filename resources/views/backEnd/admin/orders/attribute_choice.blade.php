@@ -1,0 +1,30 @@
+<div>
+    {{ Str::limit($data->name, 45) }}
+    @if ($data)
+        <br>
+        @php($k = 0)
+        @php($l = 1)
+        @php($i = 0)
+        @if (count($data->get_choice_attributes) > 0)
+            @foreach ($data->get_choice_attributes as $key => $attribute)
+               <small><b>
+                 {{ format_title($attribute->get_attribute->title) }}
+             </b></small><br>
+                <div style="display: flex; flex-wrap: wrap;flex-direction: row;align-items: center;gap: 10px">
+                    @foreach ($attribute->get_choice_attribute_items as $key2 => $item)
+                        <label class="mb-0 small" style="cursor: pointer;display: flex;align-items: center;gap: 3px"
+                            for="attribute_{{ $data->id }}_{{ strtolower($item->attribute_item_name) . '_' . $key2 }}">
+                            <input class="attribute" type="radio"
+                                name="variant[{{ $data->id }}][{{ $attribute->get_attribute->id }}]"
+                                id="attribute_{{ $data->id }}_{{ strtolower($item->attribute_item_name) . '_' . $key2 }}"
+                                value="{{ strtolower($item->attribute_item_name) }}"
+                                @if ($loop->first) checked @endif>
+
+                            {{ ucfirst($item->attribute_item_name) }}
+                        </label>
+                    @endforeach
+                </div>
+            @endforeach
+        @endif
+    @endif
+</div>

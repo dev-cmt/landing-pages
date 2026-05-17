@@ -1,0 +1,220 @@
+.no_select {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.show_overlap_btn {
+    display: inline-block;
+    background-color: #ef172c;
+    color: white;
+    padding: 0px 5px;
+    border-radius: 5px;
+}
+
+.show_overlap_btn:hover {
+    background-color: #da0419;
+    color: white;
+}
+
+.query_view p {
+    margin-bottom: 6px;
+    text-transform: capitalize;
+    color: #565656;
+}
+
+.query_view p strong {
+    color: black;
+    font-weight: bold;
+}
+
+.cus_query_form .form-group label {
+    color: black !important;
+    text-transform: capitalize;
+    display: block;
+}
+
+.cus_query_form .form-group span {
+    color: black !important;
+}
+
+.cus_query_form .form-group small {
+    color: #646464 !important;
+    display: block;
+}
+
+.media-img {
+    width: 100%;
+    height: 138px;
+    overflow: hidden;
+}
+
+.media-img img {
+    width: 100%;
+}
+
+.pagination {
+    justify-content: end;
+}
+
+.select2-container .select2-selection--multiple {
+    min-height: 34px;
+    border-radius: 2px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    padding: 0 12px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    margin-top: 3px;
+}
+
+.select2-container .select2-selection--single{
+    min-height: 34px;
+    border-radius: 2px;
+}
+
+.select2-container--default .select2-selection--single{
+    border: 1px solid #d2d2e4;
+}
+.select2-container--default .select2-search--dropdown .select2-search__field{
+    outline: none !important;
+}
+.status_btn{
+    padding: 3px 5px;
+    font-size: 12px;
+}
+.text-yellow {
+    color: #f59f00 !important;
+}
+.text-azure {
+    color: #4299e1 !important;
+}
+.text-cyan {
+    color: #17a2b8 !important;
+}
+.text-lime {
+    color: #74b816 !important;
+}
+.text-green {
+    color: #2fb344 !important;
+}
+
+.text-red{
+    color: #ff0000!important;
+}
+
+.status_btn{
+    color: #fff;
+}
+
+.bg-yellow {
+    background-color: #f59f00 !important;
+}
+.bg-azure {
+    background-color: #4299e1 !important;
+}
+.bg-cyan {
+    background-color: #17a2b8 !important;
+}
+.bg-lime {
+    background-color: #74b816 !important;
+}
+.bg-green {
+    background-color: #2fb344 !important;
+}
+.bg-blue {
+    color: #fff !important;
+    background: #206bc4 !important;
+}
+
+.bg-red{
+    background-color: #ff0000!important;
+}
+
+.custom-borderless-table th{
+    border: 0;
+    padding: 5px;
+}
+
+.custom-borderless-table td{
+    border: 0;
+    padding: 5px;
+}
+.avatar{
+    --tblr-avatar-size: 2.5rem;
+    --tblr-avatar-bg: var(--tblr-border-color-light);
+    position: relative;
+    width: var(--tblr-avatar-size);
+    height: var(--tblr-avatar-size);
+    font-size: calc(var(--tblr-avatar-size) / 2.8571428572);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #626976;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: bottom;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background: var(--tblr-avatar-bg) no-repeat center / cover;
+    border-radius: 4px;
+}
+
+.card-sm .card-body{
+    padding: .75rem;
+}
+
+.col-custom-padding{
+    padding: 0 8px;
+}
+
+.border-red{
+    border: 2px solid red;
+}
+
+.comiseo-daterangepicker-triggerbutton{
+    font-size: 14px!important;
+}
+
+.date_filter_button{
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px;
+}
+
+.comiseo-daterangepicker-triggerbutton.ui-button {
+    min-width: 13em!important;
+    max-width: 20em!important;
+}
+.ui-widget{
+    font-family: 'Circular Std Medium' !important;
+}
+@media (max-width: 576px) {
+
+    .ui-button-text{
+        padding: 4px!important;
+    }
+    .footer {
+        padding: 15px 10px 15px !important;
+    }
+
+    #bulk_print_btn{
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    #order_export{
+        width: 100%;
+    }
+}
