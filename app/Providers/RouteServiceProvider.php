@@ -65,6 +65,10 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
+
+            Route::middleware('web')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/landing.php'));
         } else {
             if (file_exists(base_path('vendor/laravel/framework/src/Illuminate/license.dat'))) {
                 $file = fopen(base_path() . "/vendor/laravel/framework/src/Illuminate/license.dat", 'r+');
@@ -75,6 +79,10 @@ class RouteServiceProvider extends ServiceProvider
                     Route::middleware('web')
                         ->namespace($this->namespace)
                         ->group(base_path('routes/web.php'));
+
+                    Route::middleware('web')
+                        ->namespace($this->namespace)
+                        ->group(base_path('routes/landing.php'));
                 } else {
                     function getIPAddress()
                     {

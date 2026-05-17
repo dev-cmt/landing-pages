@@ -119,6 +119,30 @@
 
                     <li class="nav-item">
                         @if(Auth::guard('admin')->check())
+                            <a class="nav-link {{ request()->is('admin/landing*') ? 'active' : '' }}" href="#" data-toggle="collapse" aria-expanded="{{ request()->is('admin/landing*') ? 'true' : 'false' }}"
+                               data-target="#submenu-landing"
+                               aria-controls="submenu-landing">
+                                <i class="fas fa-fw fa-file-alt"></i>
+                                Landing Pages
+                            </a>
+                            <div id="submenu-landing" class="collapse submenu {{ request()->is('admin/landing*') ? 'show' : '' }}" style="">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ request()->is('admin/landing/pages*') ? 'active' : '' }}" href="{{ route('admin.landing.pages.index') }}">Landing Page</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ request()->is('admin/landing/theme*') ? 'active' : '' }}" href="{{ route('admin.landing.theme.index') }}">Manage Theme</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ request()->is('admin/landing/category*') ? 'active' : '' }}" href="{{ route('admin.landing.category.index') }}">Manage Category</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        @endif
+                    </li>
+
+                    <li class="nav-item">
+                        @if(Auth::guard('admin')->check())
                             <a class="nav-link {{request()->is('admin-category*') ? "active" : ""}}" href="{{route('admin.category')}}">
                                 <i class="fas fa-fw fa-list-ul"></i>
                                 Category

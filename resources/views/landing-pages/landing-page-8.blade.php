@@ -416,7 +416,7 @@
                                                         <span class="quantity-plus px-3 py-1 border-start" style="cursor:pointer">+</span>
                                                     </div>
                                                     <div class="price fw-bold text-primary">
-                                                        {{ $web_settings?->currency_sign ?? '৳' }} <span class="line-price">0.00</span>
+                                                        {{ optional($web_settings)->currency_sign ?? '৳' }} <span class="line-price">0.00</span>
                                                     </div>
                                                 </div>
 
@@ -519,7 +519,7 @@
                                                 <label class="form-check-label" for="shipping_method_{{ $method->id }}">
                                                     {{ $method->type }}
                                                     @if ($method->amount > 0)
-                                                        ({{ $web_settings?->currency_sign ?? '৳' }}
+                                                        ({{ optional($web_settings)->currency_sign ?? '৳' }}
                                                         {{ $method->amount }})
                                                     @endif
                                                 </label>
@@ -550,7 +550,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th class="fs-5">Total</th>
-                                                <th class="fs-5 text-primary text-end"> {{ $web_settings?->currency_sign ?? '৳' }} <span id="summary-total">0.00</span></th>
+                                                <th class="fs-5 text-primary text-end"> {{ optional($web_settings)->currency_sign ?? '৳' }} <span id="summary-total">0.00</span></th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -569,7 +569,7 @@
                                 </div>
                             </div>
                             <button type="submit" id="submit_btn" class="order-place-button">
-                                অর্ডার কনফার্ম করুন {{ $web_settings?->currency_sign ?? '৳' }} 0.00
+                                অর্ডার কনফার্ম করুন {{ optional($web_settings)->currency_sign ?? '৳' }} 0.00
                             </button>
                         </div>
                     </div>
@@ -602,7 +602,7 @@
                 </script>
                 <script>
                     $(document).ready(function() {
-                        const currency = "{{ $web_settings?->currency_sign ?? '৳' }}";
+                        const currency = "{{ optional($web_settings)->currency_sign ?? '৳' }}";
                         /* 1. Initialize variant selection on page load */
                         $('.product-card').each(function() {
                             let $card = $(this);

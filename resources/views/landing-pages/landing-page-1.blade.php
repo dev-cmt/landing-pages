@@ -834,7 +834,7 @@
                                                                     style="cursor:pointer">+</span>
                                                             </div>
                                                             <div class="price fw-bold text-primary">
-                                                                {{ $web_settings?->currency_sign ?? '৳' }} <span
+                                                                {{ optional($web_settings)->currency_sign ?? '৳' }} <span
                                                                     class="line-price">0.00</span>
                                                             </div>
                                                         </div>
@@ -955,7 +955,7 @@
                                                     for="shipping_method_{{ $method->id }}">
                                                     {{ $method->type }}
                                                     @if ($method->amount > 0)
-                                                        ({{ $web_settings?->currency_sign ?? '৳' }}
+                                                        ({{ optional($web_settings)->currency_sign ?? '৳' }}
                                                         {{ $method->amount }})
                                                     @endif
                                                 </label>
@@ -971,7 +971,7 @@
                                 <script>
                                     $(document).on('change', '.shipping_method_radio', function() {
                                         const shippingAmount = parseFloat($(this).data('amount')) || 0;
-                                        const currency = "{{ $web_settings?->currency_sign ?? '৳' }}";
+                                        const currency = "{{ optional($web_settings)->currency_sign ?? '৳' }}";
 
                                         // Update order summary total
                                         let subtotal = parseFloat($('#summary-total').text()) || 0;
@@ -985,7 +985,7 @@
 
                                 <button type="submit" id="submit_btn"
                                     class="order-place-button btn btn-primary btn-lg w-100">
-                                    Place Order {{ $web_settings?->currency_sign ?? '৳' }} 0.00
+                                    Place Order {{ optional($web_settings)->currency_sign ?? '৳' }} 0.00
                                 </button>
                             </div>
                         </div>
@@ -1005,21 +1005,21 @@
                                             <tr>
                                                 <th class="fs-5">Subtotal</th>
                                                 <th class="fs-5">
-                                                    {{ $web_settings?->currency_sign ?? '৳' }} <span
+                                                    {{ optional($web_settings)->currency_sign ?? '৳' }} <span
                                                         id="summary-subtotal">0.00</span>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th class="fs-5">Shipping</th>
                                                 <th class="fs-5">
-                                                    {{ $web_settings?->currency_sign ?? '৳' }} <span
+                                                    {{ optional($web_settings)->currency_sign ?? '৳' }} <span
                                                         id="summary-shipping">0.00</span>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th class="fs-5">Total</th>
                                                 <th class="fs-5">
-                                                    {{ $web_settings?->currency_sign ?? '৳' }} <span
+                                                    {{ optional($web_settings)->currency_sign ?? '৳' }} <span
                                                         id="summary-total">0.00</span>
                                                 </th>
                                             </tr>
@@ -1059,7 +1059,7 @@
                 </script>
                 <script>
                     $(document).ready(function() {
-                        const currency = "{{ $web_settings?->currency_sign ?? '৳' }}";
+                        const currency = "{{ optional($web_settings)->currency_sign ?? '৳' }}";
 
                         // Auto-select first product on page load
                         let $firstCard = $('.product-card:first');
